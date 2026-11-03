@@ -220,13 +220,10 @@
         }
 
         // Karte initialisieren
-        const map = L.map('map').setView([51.1657, 10.4515], 6);
-        
-        // Kartenlayer hinzufügen
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
+      // Kartenlayer hinzufügen
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
         let mappedCustomers = 0;
         
         // Kunden auf Karte platzieren
