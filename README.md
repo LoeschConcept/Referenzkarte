@@ -1,2 +1,3 @@
 # Referenzkarte
-Übersicht aller laufenden Aufträge
+Visualisierung der Baustellenstandorte basierend auf Postleitzahlen
+Jeder blaue Punkt repräsentiert einen Baustellenstandort.
