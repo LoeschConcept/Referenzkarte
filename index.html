@@ -110,11 +110,11 @@
     <div class="stats">
         <div class="stat-item">
             <div class="stat-number" id="total-customers">0</div>
-            <div class="stat-label">Gesamtkunden</div>
+            <div class="stat-label">Baustellen</div>
         </div>
         <div class="stat-item">
             <div class="stat-number" id="mapped-customers">0</div>
-            <div class="stat-label">Auf Karte</div>
+            <div class="stat-label">Kartiert</div>
         </div>
         <div class="stat-item">
             <div class="stat-number" id="coverage-percent">0%</div>
@@ -244,10 +244,10 @@ Quelle: Baustellen
                 }).addTo(map);
                 
                 marker.bindPopup(`
-                    <strong>${customer.name}</strong><br>
-                    Kunden-Nr: ${customer.id}<br>
-                    PLZ: ${customer.plz}
-                `);
+    <strong>${customer.name}</strong><br>
+    PLZ: ${customer.plz}<br>
+    Anzahl Baustellen: ${customer.count}
+`);
                 
                 mappedCustomers++;
             }
