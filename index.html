@@ -125,57 +125,58 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
         // Kundendaten aus der PDF (nur deutsche PLZ)
-        const projects = [
-    { city: "Aachen", count: 2, lat: 50.7753, lng: 6.0839 },
-    { city: "Alzenau", count: 3, lat: 50.0889, lng: 9.0640 },
-    { city: "Augsburg", count: 1, lat: 48.3705, lng: 10.8978 },
-    { city: "Bautzen", count: 1, lat: 51.1800, lng: 14.4341 },
-    { city: "Berlin", count: 3, lat: 52.5200, lng: 13.4050 },
-    { city: "Blankenhain", count: 1, lat: 50.8580, lng: 11.3430 },
-    { city: "Blaustein", count: 1, lat: 48.4167, lng: 9.9167 },
-    { city: "Böblingen", count: 1, lat: 48.6820, lng: 9.0110 },
-    { city: "Bochum", count: 1, lat: 51.4818, lng: 7.2162 },
-    { city: "Darmstadt", count: 2, lat: 49.8728, lng: 8.6512 },
-    { city: "Dortmund", count: 2, lat: 51.5136, lng: 7.4653 },
-    { city: "Duisburg", count: 5, lat: 51.4344, lng: 6.7623 },
-    { city: "Düren", count: 2, lat: 50.8043, lng: 6.4932 },
-    { city: "Essen", count: 4, lat: 51.4556, lng: 7.0116 },
-    { city: "Ettlingen", count: 1, lat: 48.9416, lng: 8.4076 },
-    { city: "Euskirchen", count: 2, lat: 50.6606, lng: 6.7872 },
-    { city: "Feuchtwangen", count: 1, lat: 49.1667, lng: 10.3333 },
-    { city: "Frankfurt", count: 1, lat: 50.1109, lng: 8.6821 },
-    { city: "Fulda", count: 1, lat: 50.5558, lng: 9.6808 },
-    { city: "Gelsenkirchen", count: 1, lat: 51.5177, lng: 7.0857 },
-    { city: "Geretsried", count: 1, lat: 47.8653, lng: 11.4806 },
-    { city: "Gladbeck", count: 1, lat: 51.5708, lng: 6.9859 },
-    { city: "Gummersbach", count: 3, lat: 51.0261, lng: 7.5647 },
-    { city: "Hamburg", count: 1, lat: 53.5511, lng: 9.9937 },
-    { city: "Hannover", count: 1, lat: 52.3759, lng: 9.7320 },
-    { city: "Holzminden", count: 1, lat: 51.8276, lng: 9.4455 },
-    { city: "Holzwickede", count: 1, lat: 51.5000, lng: 7.6167 },
-    { city: "Koblenz", count: 1, lat: 50.3569, lng: 7.5889 },
-    { city: "Laatzen", count: 2, lat: 52.3070, lng: 9.8060 },
-    { city: "Magdeburg", count: 1, lat: 52.1205, lng: 11.6276 },
-    { city: "Mannheim", count: 1, lat: 49.4875, lng: 8.4660 },
-    { city: "Memmingen", count: 3, lat: 47.9837, lng: 10.1853 },
-    { city: "Minden", count: 1, lat: 52.2895, lng: 8.9146 },
-    { city: "Münster", count: 1, lat: 51.9607, lng: 7.6261 },
-    { city: "Neuss", count: 3, lat: 51.1981, lng: 6.6850 },
-    { city: "Nordhausen", count: 1, lat: 51.5030, lng: 10.7910 },
-    { city: "Nürnberg", count: 2, lat: 49.4521, lng: 11.0767 },
-    { city: "Reutlingen", count: 1, lat: 48.4914, lng: 9.2043 },
-    { city: "Rieste", count: 1, lat: 52.4833, lng: 8.0167 },
-    { city: "Röthenbach", count: 1, lat: 49.4833, lng: 11.2500 },
-    { city: "Schweinfurt", count: 1, lat: 50.0492, lng: 10.2218 },
-    { city: "Solingen", count: 1, lat: 51.1652, lng: 7.0671 },
-    { city: "Sulz", count: 1, lat: 48.3667, lng: 8.6333 },
-    { city: "Trier", count: 1, lat: 49.7499, lng: 6.6371 },
-    { city: "Waalwijk", count: 1, lat: 51.6822, lng: 5.0708 },
-    { city: "Walsum", count: 2, lat: 51.5280, lng: 6.7560 },
-    { city: "Wedemark", count: 1, lat: 52.5410, lng: 9.7350 },
-    { city: "Wipperfürth", count: 2, lat: 51.1198, lng: 7.3979 },
-    { city: "Witten", count: 2, lat: 51.4439, lng: 7.3526 }
+        const customers = [
+{name: "Aachen", plz: "52152", count: 2},
+{name: "Alzenau", plz: "63755", count: 3},
+{name: "Augsburg", plz: "86150", count: 1},
+{name: "Bautzen", plz: "02625", count: 1},
+{name: "Berlin", plz: "45128", count: 3},
+{name: "Blankenhain", plz: "99444", count: 1},
+{name: "Blaustein", plz: "89143", count: 1},
+{name: "Böblingen", plz: "71034", count: 1},
+{name: "Bochum", plz: "44801", count: 1},
+{name: "Darmstadt", plz: "64283", count: 2},
+{name: "Dortmund", plz: "74172", count: 2},
+{name: "Duisburg", plz: "49811", count: 5},
+{name: "Düren", plz: "52355", count: 2},
+{name: "Essen", plz: "49632", count: 4},
+{name: "Ettlingen", plz: "70182", count: 1},
+{name: "Euskirchen", plz: "53879", count: 2},
+{name: "Feuchtwangen", plz: "45359", count: 1},
+{name: "Frankfurt", plz: "60389", count: 1},
+{name: "Fulda", plz: "36037", count: 1},
+{name: "Gelsenkirchen", plz: "45879", count: 1},
+{name: "Geretsried", plz: "82538", count: 1},
+{name: "Gladbeck", plz: "45964", count: 1},
+{name: "Gummersbach", plz: "51643", count: 3},
+{name: "Hamburg", plz: "20539", count: 1},
+{name: "Hannover", plz: "30159", count: 1},
+{name: "Holzminden", plz: "37603", count: 1},
+{name: "Holzwickede", plz: "59439", count: 1},
+{name: "Koblenz", plz: "64521", count: 1},
+{name: "Laatzen", plz: "30880", count: 2},
+{name: "Magdeburg", plz: "39104", count: 1},
+{name: "Mannheim", plz: "68159", count: 1},
+{name: "Memmingen", plz: "87700", count: 3},
+{name: "Minden", plz: "32423", count: 1},
+{name: "Münster", plz: "35463", count: 1},
+{name: "Neuss", plz: "41460", count: 3},
+{name: "Nordhausen", plz: "99734", count: 1},
+{name: "Nürnberg", plz: "90402", count: 2},
+{name: "Reutlingen", plz: "72762", count: 1},
+{name: "Rieste", plz: "49597", count: 1},
+{name: "Röthenbach", plz: "90552", count: 1},
+{name: "Schweinfurt", plz: "97424", count: 1},
+{name: "Solingen", plz: "42651", count: 1},
+{name: "Sulz", plz: "72172", count: 1},
+{name: "Trier", plz: "54294", count: 1},
+{name: "Walsum", plz: "47059", count: 2},
+{name: "Wedemark", plz: "30900", count: 1},
+{name: "Wipperfürth", plz: "51643", count: 2},
+{name: "Witten", plz: "58453", count: 2}
 ];
+
+Quelle: Baustellen
         // Vereinfachte PLZ-zu-Koordinaten-Zuordnung (Approximation für deutsche PLZ)
         function plzToCoordinates(plz) {
             const plzMap = {
@@ -220,32 +221,33 @@
         }
 
         // Karte initialisieren
-      // Kartenlayer hinzufügen
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+        const map = L.map('map').setView([51.1657, 10.4515], 6);
+        
+        // Kartenlayer hinzufügen
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
         let mappedCustomers = 0;
         
         // Kunden auf Karte platzieren
-        cprojects.forEach(project => {
-
-    const marker = L.circleMarker(
-        [project.lat, project.lng],
-        {
-            radius: 6 + (project.count * 2),
-            fillColor: '#2c5aa0',
-            color: '#fff',
-            weight: 2,
-            opacity: 1,
-            fillOpacity: 0.75
-        }
-    ).addTo(map);
-
-    marker.bindPopup(`
-        <strong>${project.city}</strong><br>
-        ${project.count} Auftrag(e)
-    `);
-});
+        customers.forEach(customer => {
+            const coords = plzToCoordinates(customer.plz);
+            if (coords) {
+                const marker = L.circleMarker(coords, {
+                    radius: 8,
+                    fillColor: '#2c5aa0',
+                    color: '#fff',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.7
+                }).addTo(map);
+                
+                marker.bindPopup(`
+                    <strong>${customer.name}</strong><br>
+                    Kunden-Nr: ${customer.id}<br>
+                    PLZ: ${customer.plz}
+                `);
                 
                 mappedCustomers++;
             }
