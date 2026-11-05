@@ -96,7 +96,7 @@
     <div class="header">
         <h1>🗺️ Referenzkarte Deutschland</h1>
         <div class="info">
-            <strong>Visualisierung der Kundenstandorte basierend auf Postleitzahlen</strong><br>
+            <strong>Visualisierung unserer betreuten Projekte in Deutschland</strong><br>
             Jeder blaue Punkt repräsentiert ein Projekt, für das wir arbeiten. Klicken Sie auf die Punkte für Details.
         </div>
     </div>
@@ -124,100 +124,52 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
-        // Kundendaten aus der PDF (nur deutsche PLZ)
-        const customers = [
-{name: "Aachen", plz: "52152", count: 2},
-{name: "Alzenau", plz: "63755", count: 3},
-{name: "Augsburg", plz: "86150", count: 1},
-{name: "Bautzen", plz: "02625", count: 1},
-{name: "Berlin", plz: "45128", count: 3},
-{name: "Blankenhain", plz: "99444", count: 1},
-{name: "Blaustein", plz: "89143", count: 1},
-{name: "Böblingen", plz: "71034", count: 1},
-{name: "Bochum", plz: "44801", count: 1},
-{name: "Darmstadt", plz: "64283", count: 2},
-{name: "Dortmund", plz: "74172", count: 2},
-{name: "Duisburg", plz: "49811", count: 5},
-{name: "Düren", plz: "52355", count: 2},
-{name: "Essen", plz: "49632", count: 4},
-{name: "Ettlingen", plz: "70182", count: 1},
-{name: "Euskirchen", plz: "53879", count: 2},
-{name: "Feuchtwangen", plz: "45359", count: 1},
-{name: "Frankfurt", plz: "60389", count: 1},
-{name: "Fulda", plz: "36037", count: 1},
-{name: "Gelsenkirchen", plz: "45879", count: 1},
-{name: "Geretsried", plz: "82538", count: 1},
-{name: "Gladbeck", plz: "45964", count: 1},
-{name: "Gummersbach", plz: "51643", count: 3},
-{name: "Hamburg", plz: "20539", count: 1},
-{name: "Hannover", plz: "30159", count: 1},
-{name: "Holzminden", plz: "37603", count: 1},
-{name: "Holzwickede", plz: "59439", count: 1},
-{name: "Koblenz", plz: "64521", count: 1},
-{name: "Laatzen", plz: "30880", count: 2},
-{name: "Magdeburg", plz: "39104", count: 1},
-{name: "Mannheim", plz: "68159", count: 1},
-{name: "Memmingen", plz: "87700", count: 3},
-{name: "Minden", plz: "32423", count: 1},
-{name: "Münster", plz: "35463", count: 1},
-{name: "Neuss", plz: "41460", count: 3},
-{name: "Nordhausen", plz: "99734", count: 1},
-{name: "Nürnberg", plz: "90402", count: 2},
-{name: "Reutlingen", plz: "72762", count: 1},
-{name: "Rieste", plz: "49597", count: 1},
-{name: "Röthenbach", plz: "90552", count: 1},
-{name: "Schweinfurt", plz: "97424", count: 1},
-{name: "Solingen", plz: "42651", count: 1},
-{name: "Sulz", plz: "72172", count: 1},
-{name: "Trier", plz: "54294", count: 1},
-{name: "Walsum", plz: "47059", count: 2},
-{name: "Wedemark", plz: "30900", count: 1},
-{name: "Wipperfürth", plz: "51643", count: 2},
-{name: "Witten", plz: "58453", count: 2}
-];
-
-        // Vereinfachte PLZ-zu-Koordinaten-Zuordnung (Approximation für deutsche PLZ)
-        function plzToCoordinates(plz) {
-            const plzMap = {
-                // Nordrhein-Westfalen
-                "40": [51.4556, 7.0116], "41": [51.4556, 7.0116], "42": [51.4556, 7.0116], 
-                "44": [51.5136, 7.4653], "45": [51.4556, 7.0116], "46": [51.4556, 7.0116], 
-                "48": [51.9607, 7.6261], "49": [52.2799, 8.0472],
-                "50": [50.9375, 6.9603], "51": [50.9375, 6.9603], "52": [50.9375, 6.9603], 
-                "53": [50.7374, 7.0982], "54": [50.2038, 6.4415], "55": [50.0051, 7.3954],
-                "58": [51.3127, 7.7405],
-                
-                // Bayern
-                "80": [48.1351, 11.5820], "81": [48.1351, 11.5820], "84": [48.2082, 11.6845],
-                "85": [48.2082, 11.6845], "86": [48.3668, 10.8986], "93": [49.0134, 12.1016],
-                
-                // Baden-Württemberg
-                "60": [50.1109, 8.6821], "63": [49.8728, 8.6512], "64": [49.8728, 8.6512], 
-                "65": [50.0833, 8.2406], "66": [49.2401, 7.0662], "68": [49.4875, 8.4660],
-                "70": [48.7758, 9.1829], "74": [49.1427, 9.2109], "76": [48.9936, 8.4177],
-                
-                // Hessen
-                "35": [50.5558, 9.6808], "37": [51.5414, 9.9158], "38": [52.2689, 10.5268],
-                
-                // Niedersachsen
-                "21": [53.5511, 9.9937], "22": [53.5511, 9.9937], "25": [53.8498, 8.6092],
-                "26": [53.1539, 7.9813], "28": [53.0793, 8.8017], "30": [52.3759, 9.7320], 
-                "31": [52.0705, 10.3305], "39": [52.1205, 11.6276],
-                
-                // Berlin
-                "10": [52.5200, 13.4050], "12": [52.5200, 13.4050], "14": [52.5200, 13.4050],
-                "15": [52.3676, 14.1206],
-                
-                // Hamburg
-                "20": [53.5511, 9.9937],
-                
-                // Thüringen
-                "07": [50.8503, 12.0928]
-            };
-            
-            const prefix = plz.substring(0, 2);
-            return plzMap[prefix] || [51.1657, 10.4515]; // Fallback: Deutschland Zentrum
-        }
+// Daten aus CSV laden
+async function loadData() {
+ 
+const response = await fetch('GitHub_Baustellen.csv');
+const csvText = await response.text();
+ 
+const rows = csvText.trim().split('\n');
+const data = rows.slice(1);
+ 
+let mappedCustomers = 0;
+ 
+data.forEach(row => {
+ 
+const columns = row.split(',');
+ 
+const city = columns[0];
+const lat = parseFloat(columns[1]);
+const lon = parseFloat(columns[2]);
+const count = parseInt(columns[3]);
+ 
+if (!isNaN(lat) && !isNaN(lon)) {
+ 
+const marker = L.circleMarker([lat, lon], {
+radius: 5 + count,
+fillColor: '#2c5aa0',
+color: '#ffffff',
+weight: 2,
+opacity: 1,
+fillOpacity: 0.75
+}).addTo(map);
+ 
+marker.bindPopup(`
+<strong>${city}</strong><br>
+Anzahl Baustellen: ${count}
+`);
+ 
+mappedCustomers += count;
+}
+});
+ 
+document.getElementById('loading').style.display = 'none';
+ 
+document.getElementById('total-customers').textContent = mappedCustomers;
+document.getElementById('mapped-customers').textContent = data.length;
+document.getElementById('coverage-percent').textContent = '100%';
+}
 
         // Karte initialisieren
         const map = L.map('map').setView([51.1657, 10.4515], 6);
@@ -227,30 +179,7 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        let mappedCustomers = 0;
-        
-        // Kunden auf Karte platzieren
-        customers.forEach(customer => {
-            const coords = plzToCoordinates(customer.plz);
-            if (coords) {
-                const marker = L.circleMarker(coords, {
-                    radius: 8,
-                    fillColor: '#2c5aa0',
-                    color: '#fff',
-                    weight: 2,
-                    opacity: 1,
-                    fillOpacity: 0.7
-                }).addTo(map);
-                
-                marker.bindPopup(`
-    <strong>${customer.name}</strong><br>
-    PLZ: ${customer.plz}<br>
-    Anzahl Baustellen: ${customer.count}
-`);
-                
-                mappedCustomers++;
-            }
-        });
+loadData();   
         
         // Loading entfernen
         document.getElementById('loading').style.display = 'none';
