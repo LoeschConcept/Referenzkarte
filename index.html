@@ -181,14 +181,6 @@ document.getElementById('coverage-percent').textContent = '100%';
 
 loadData();   
         
-        // Loading entfernen
-        document.getElementById('loading').style.display = 'none';
-        
-        // Statistiken aktualisieren
-        document.getElementById('total-customers').textContent = customers.length;
-        document.getElementById('mapped-customers').textContent = mappedCustomers;
-        document.getElementById('coverage-percent').textContent = 
-            Math.round((mappedCustomers / customers.length) * 100) + '%';
     </script>
 </body>
 </html>
